@@ -43,6 +43,7 @@ Route::get('/post/{id}/delete','PostsController@delete');
 Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@search');
+Route::get('/search/select','UsersController@select');
 
 Route::get('/follow-list','followsController@followList');
 Route::get('/follower-list','followsController@followerList');

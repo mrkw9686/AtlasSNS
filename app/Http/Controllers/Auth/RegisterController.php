@@ -54,9 +54,10 @@ class RegisterController extends Controller
             'password' => 'required|string|alpha_num|min:8|max:20|confirmed',
         ]);
         if($validator->fails()){
- return redirect('post/create')//リダイレクト　back()
-                        ->withErrors($validator)
-                        ->withInput();
+        return redirect('post/create')
+        //リダイレクト　back()
+         ->withInput();
+        ->withErrors($validator)
   }
     }
 

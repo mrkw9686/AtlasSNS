@@ -1,11 +1,8 @@
 // アコーディオンメニュー
-// $(function () {
-//   $('.menu-trigger').click(function () { // ①
-//     $(this).toggleClass('active');       // ②
-//     //以下省略
-//   });
-// });
-
+$('.menu-btn').click(function () {
+  $(this).toggleClass('is-open');
+  $(this).siblings('.menu').toggleClass('is-open');
+});
 
 // モーダル
 $(function () {

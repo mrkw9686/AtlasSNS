@@ -1,7 +1,7 @@
 @extends('layouts.login')
 
 @section('content')
-
+<!-- 投稿ボタン -->
 {!! Form::open(['url' => 'post/create']) !!}
      <div class="form-group">
        <img src="{{ asset('images/icon1.png') }}">
@@ -9,33 +9,38 @@
      </div>
      <button type="submit" class="btn btn-success pull-right"><img src="{{ asset('images/post.png') }}"></button>
  {!! Form::close() !!}
-
-       @foreach ($list as $list)
+<!-- 投稿リスト -->
+       @foreach ($posts as $posts)
 <li class="post-block">
        <tr>
-          <td>{{ $list->id }}</td>
+          <td>{{ $posts->id }}</td>
           <div class="post-content">
- <div class="post-name">{{ $list->user_id }}</div>
+ <div class="post-name">{{ $posts->user_id }}</div>
 
-          <div><td>{{ $list->created_at }}</td></div>
-          <div><td>{{ $list->post }}</td></div>
+          <div><td>{{ $posts->created_at }}</td></div>
+          <div><td>{{ $posts->post }}</td></div>
 </div>
-
-        <a class="js-modal-open" href="" post="{{ $list->post }}" post_id="{{ $list->id }}"><img src="{{ asset('images/edit.png') }}"></a>
-
-          <a class="btn btn-danger" href="/post/{{$list->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">　<img src="{{ asset('images/trash.png') }}"></a>
+<!-- 更新ボタン -->
+    <div class="content">
+        <a class="js-modal-open" href="" post_id="{{ $posts->id }}" post="{{ $posts->post }}" ><img src="{{ asset('images/edit.png') }}"></a>
+    </div>
+<!-- 削除ボタン -->
+          <a class="btn btn-danger" href="/post/{{$posts->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">　<img src="{{ asset('images/trash.png') }}"></a>
         </li>
        @endforeach
+       <!-- モーダルウィンドウ -->
        <div class="modal js-modal">
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-           <form action="" method="">
-                <input type="hidden" name="" class="modal_id" value="">
-                <input type="submit" value="更新">
-                                <textarea name="" class="modal_post"></textarea>
+<form method="POST" action="http://127.0.0.1:8000/post/update" accept-charset="UTF-8">
+            <input class="modal_id" name="id" type="hidden" value="post_id">
 
-           </form>
+            <textarea class="modal_post" name="upPost"></textarea>
+        <button type="submit" class="btn btn-primary pull-right"><img src="{{ asset('images/edit.png') }}"></button>
+        {{ csrf_field() }}
+        </form>
            <a class="js-modal-close" href="">閉じる</a>
+
         </div>
     </div>
    </table>
