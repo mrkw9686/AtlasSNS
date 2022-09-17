@@ -32,7 +32,7 @@
        <div class="modal js-modal">
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-<form method="POST" action="http://127.0.0.1:8000/post/update" accept-charset="UTF-8">
+<form method="POST" action="{{ url('/update')}}" accept-charset="UTF-8">
             <input class="modal_id" name="id" type="hidden" value="post_id">
 
             <textarea class="modal_post" name="upPost"></textarea>

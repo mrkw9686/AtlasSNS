@@ -3,7 +3,7 @@
 @section('content')
 
     <div id="search">
-      <form action="http://127.0.0.1:8000/search/select" method="get">
+      <form action="/search/select" method="get">
         <input type="text" name="search" value placeholder="ユーザー名で検索">
         <button id="sbtn" type="submit">
           <i class="bi-alarm">
@@ -24,7 +24,22 @@
   <td><img src="{{ asset('images/icon1.png') }}"></td>
   <td>{{$users->username}}</td>
 
+  @if (auth()->user()->isFollowing($users->id))
+  <form action="{{ url('/users/unfollow')}}" method="POST">
+    {{ csrf_field() }}
+  <input name="id" type="hidden" value="{{ $users->id }}">
+     <button type="submit" class="btn btn-primary">フォロー解除</button>
+  </form>
+ @else
+  <form action="{{ url('/users/follow')}}" method="POST">
+    {{ csrf_field() }}
+  <input name="id" type="hidden" value="{{ $users->id }}">
+     <button type="submit" class="btn btn-primary">フォローする</button>
+  </form>
+@endif
+
   </tr>
+
   @endforeach
 
 @endsection

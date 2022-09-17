@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -47,5 +48,8 @@ Route::get('/search/select','UsersController@select');
 
 Route::get('/follow-list','followsController@followList');
 Route::get('/follower-list','followsController@followerList');
+
+Route::post('/users/follow', 'FollowsController@follow');
+Route::post('/users/unfollow', 'FollowsController@unfollow');
 
 Route::get('/logout', 'Auth\LoginController@logout');
