@@ -24,7 +24,7 @@ class FollowsController extends Controller
         ([
             'following_id' => Auth::user()->id,
             'followed_id' =>$user
-            // $users->id,
+
         ]);
         return redirect('/search');
         // $followCount = count(follow::where('followed_id')->get());

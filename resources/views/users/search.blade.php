@@ -20,6 +20,7 @@
       </form>
 
   @foreach($users as $users)
+   @if($users->id != auth()->user()->id)
   <tr>
   <td><img src="{{ asset('images/icon1.png') }}"></td>
   <td>{{$users->username}}</td>
@@ -39,7 +40,7 @@
 @endif
 
   </tr>
-
+@endif
   @endforeach
 
 @endsection

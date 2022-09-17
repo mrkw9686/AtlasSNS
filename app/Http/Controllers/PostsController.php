@@ -11,21 +11,26 @@ class PostsController extends Controller
     //
     public function index(){
    $posts = \DB::table('posts')->get();
+   // フォローしているユーザーのidを取得
+//   $following_id = Auth::user()->follows()->pluck(' following_id ');
+
+// フォローしているユーザーのidを元に投稿内容を取得
+//   $posts = Post::with('user')->whereIn(' username ', $following_id)->get();
         return view('posts.index',['posts'=>$posts]);
     }
 
-    protected function validator($data)
-    {
-  $validator = Validator::make($data->all(),
-            ['newPost' => 'required|max:10',]
-        );
-                if($validator->fails()){
-        return redirect('/top')
-        //リダイレクト　back()
-         ->withInput()
-         ->withErrors($validator);
-        }
-    }
+//     protected function validator($data)
+//     {
+//   $validator = Validator::make($data->all(),
+//             ['newPost' => 'required|max:10',]
+//         );
+//                 if($validator->fails()){
+//         return redirect('/top')
+//         //リダイレクト　back()
+//          ->withInput()
+//          ->withErrors($validator);
+//         }
+//     }
     // バリテーション
     // public function store(Request $request)
     // {
@@ -44,7 +49,7 @@ class PostsController extends Controller
     {
         $user_id = Auth::id();
         $post = $request->input('newPost');
-                $this->validator($data);
+                // $this->validator($data);
         \DB::table('posts')->insert([
             'post' => $post,
             'user_id' => $user_id ]);
@@ -78,6 +83,7 @@ public function updateForm($id)
 
 public function delete($id)
 {
+    $user_id= Auth::id();
      \DB::table('posts')
      ->where('id',$id)
      ->delete();

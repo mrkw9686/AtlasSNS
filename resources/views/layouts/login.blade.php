@@ -31,32 +31,15 @@
         <div id = "head">
         <h1><a href="/top"><img src="{{ asset('images/atlas.png') }}"></a></h1>
 
-                         <p>
-さん</p>
-<button type="button" class="menu-btn">
-  <span class="inn"></span>
-</button>
-
-<nav class="menu">
-  <ul>
-    <li><a href="/top">ホーム</a></li>
-    <li><a href="/profile">プロフィール</a></li>
-    <li><a href="/logout">ログアウト</a></li>
-  </ul>
-</nav>
+                         <p>{{Auth::user()->username}}さん</p>
+        <div class="accordion">
+          <dl>
+            <dt></dt>
+            <dd><span><a href="/top">ホーム</a></span></dd>
+            <dd><span><a href="/profile">プロフィール</a></span></dd>
+            <dd><span><a href="/logout">ログアウト</a></span></dd>
+          </dl>
         </div>
-<!-- <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z"/>
-</svg> -->
-  <!-- </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown">
-    <li><a class="dropdown-item" href="/top">ホーム</a></li>
-    <li><a class="dropdown-item" href="/profile">プロフィール</a></li>
-    <li><a class="dropdown-item" href="/logout">ログアウト</a></li>
-  </ul>
-</div> -->
 
 
     </header>
@@ -66,15 +49,15 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{Auth::user()->username}}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>{{(auth()->user()->follows()->count())}}名</p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>{{(auth()->user()->followers()->count())}}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>

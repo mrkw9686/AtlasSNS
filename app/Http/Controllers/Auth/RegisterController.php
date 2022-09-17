@@ -56,8 +56,8 @@ class RegisterController extends Controller
         if($validator->fails()){
         return redirect('post/create')
         //リダイレクト　back()
-         ->withInput();
-        ->withErrors($validator)
+         ->withInput()
+        ->withErrors($validator);
   }
     }
 
