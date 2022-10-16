@@ -4,10 +4,10 @@
 <!-- 投稿ボタン -->
 {!! Form::open(['url' => 'post/create']) !!}
      <div class="form-group">
-       <img src="{{ asset('images/icon1.png') }}">
+    <td><img src="{{asset('storage/'.Auth::user()->images)}}" class="icon"></td>
          {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください。']) !!}
      </div>
-     <button type="submit" class="btn btn-success pull-right"><img src="{{ asset('images/post.png') }}"></button>
+     <button type="submit"><img src="{{ asset('images/post.png') }}"></button>
  {!! Form::close() !!}
 <!-- 投稿リスト -->
        @foreach ($posts as $posts)
@@ -15,7 +15,7 @@
        <tr>
           <td>{{ $posts->id }}</td>
           <div class="post-content">
- <div class="post-name">{{ $posts->user_id }}</div>
+ <div class="post-name">{{ $posts->user->username }}</div>
 
           <div><td>{{ $posts->created_at }}</td></div>
           <div><td>{{ $posts->post }}</td></div>

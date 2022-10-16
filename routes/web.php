@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
+Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
@@ -43,7 +43,12 @@ Route::post('/post/update', 'PostsController@update');
 
 Route::get('/post/{id}/delete','PostsController@delete');
 
-Route::get('/profile','UsersController@profile');
+Route::get('/profile/{id}','UsersController@profile');
+
+Route::get('/myprofile','UsersController@myprofile');
+Route::post('/myprofile','UsersController@myprofile');
+
+Route::post('/up_profile','UsersController@up_profile');
 
 Route::get('/search','UsersController@search');
 Route::get('/search/select','UsersController@select');
@@ -55,5 +60,4 @@ Route::post('/users/follow', 'FollowsController@follow');
 Route::post('/users/unfollow', 'FollowsController@unfollow');
 
 Route::get('/logout', 'Auth\LoginController@logout');
-
 });

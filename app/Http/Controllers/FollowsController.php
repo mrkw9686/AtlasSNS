@@ -6,20 +6,37 @@ use Illuminate\Http\Request;
 use Auth;
 use App\follow;
 use App\User;
+use App\Post;
 
 class FollowsController extends Controller
 {
     //
     public function followList(){
-        return view('follows.followList');
+//    フォローしているユーザーのidを取得
+  $following_id = Auth::user()->follows()->pluck('followed_id');
+// フォローしているユーザーのidを元に投稿内容を取得
+  $posts = Post::with('user')->whereIn('user_id', $following_id)->orderBy('created_at', 'desc')->get();
+
+  $users = User::whereIn('id', $following_id)->get();
+        return view('follows.followList',['posts'=>$posts,'users'=>$users]);
     }
+
     public function followerList(){
-        return view('follows.followerList');
+        //    フォローされてるユーザーのidを取得
+  $followed_id = Auth::user()->followers()->pluck('following_id');
+// フォローされてるユーザーのidを元に投稿内容を取得
+  $posts = Post::with('user')->whereIn('user_id', $followed_id)->orderBy('created_at', 'desc')->get();
+
+  $users = User::whereIn('id', $followed_id)->get();
+        return view('follows.followerList',['posts'=>$posts,'users'=>$users]);
 
     }
+
+
+    // フォローボタン
+
         public function follow(Request $request) {
             $user =$request->input('id');
-        // $follow = follow::create
        \DB::table('follows')->insert
         ([
             'following_id' => Auth::user()->id,
@@ -27,9 +44,6 @@ class FollowsController extends Controller
 
         ]);
         return redirect('/search');
-        // $followCount = count(follow::where('followed_id')->get());
-        // return response()
-        // ->json(['followCount' => $followCount]);
     }
 
     public function unfollow(Request $request) {
@@ -39,9 +53,6 @@ class FollowsController extends Controller
         if (!empty($follow)) {
         $follow->delete();
         }
-
-        // $followCount = count(follows::where('followed_user_id', $users->id)->get());
 return redirect('/search');
-        // return response()->json(['followCount' => $followCount]);
     }
 }

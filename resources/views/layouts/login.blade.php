@@ -30,13 +30,13 @@
     <header>
         <div id = "head">
         <h1><a href="/top"><img src="{{ asset('images/atlas.png') }}"></a></h1>
+       <p><a href="/myprofile"><img src="{{asset('storage/'.Auth::user()->images)}}" class="icon"></a>{{Auth::user()->username}}さん</p>
 
-                         <p>{{Auth::user()->username}}さん</p>
         <div class="accordion">
           <dl>
             <dt></dt>
             <dd><span><a href="/top">ホーム</a></span></dd>
-            <dd><span><a href="/profile">プロフィール</a></span></dd>
+            <dd><span><a href="/myprofile">プロフィール</a></span></dd>
             <dd><span><a href="/logout">ログアウト</a></span></dd>
           </dl>
         </div>

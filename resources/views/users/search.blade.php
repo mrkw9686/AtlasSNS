@@ -22,7 +22,7 @@
   @foreach($users as $users)
    @if($users->id != auth()->user()->id)
   <tr>
-  <td><img src="{{ asset('images/icon1.png') }}"></td>
+  <td><a href="/profile/{{$users->id}}"><img src="{{asset('storage/'.$users->images)}}" class="icon"></a></td>
   <td>{{$users->username}}</td>
 
   @if (auth()->user()->isFollowing($users->id))

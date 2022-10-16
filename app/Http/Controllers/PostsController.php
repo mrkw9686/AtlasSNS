@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Validator;
-
+use App\Post;
 class PostsController extends Controller
 {
-    //
-    public function index(){
-   $posts = \DB::table('posts')->get();
-   // フォローしているユーザーのidを取得
-//   $following_id = Auth::user()->follows()->pluck(' following_id ');
 
+    public function index(){
+//    フォローしているユーザーのidを取得
+  $following_id = Auth::user()->follows()->pluck('followed_id');
 // フォローしているユーザーのidを元に投稿内容を取得
-//   $posts = Post::with('user')->whereIn(' username ', $following_id)->get();
+  $posts = Post::with('user')->whereIn('user_id', $following_id)->orWhere('user_id',Auth::id())->get();
         return view('posts.index',['posts'=>$posts]);
     }
+
+
 
 //     protected function validator($data)
 //     {
