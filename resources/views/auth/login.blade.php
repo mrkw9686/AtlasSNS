@@ -16,6 +16,7 @@
 
 <p><a href="/register">新規ユーザーの方はこちら</a></p>
 
+
 {!! Form::close() !!}
 
 @endsection

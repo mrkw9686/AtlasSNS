@@ -31,6 +31,7 @@
 <div id="container">
     @yield('content')
   </div>
+
      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{{ asset('/js/script.js') }}"></script>
     <script type="text/javascript"　src="{{ asset('js/app.js') }}"></script>

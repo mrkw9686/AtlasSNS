@@ -5,9 +5,9 @@
 
   @foreach($users as $users)
 
-  <td><img src="{{ asset('images/icon1.png') }}">{{$users->username}}</td>
+  <td><img src="{{asset('storage/'.$users->images)}}" class="icon">{{$users->username}}</td>
   <td>Bio{{$users->bio}} </td>
-
+  
   @if (auth()->user()->isFollowing($users->id))
   <form action="{{ url('/users/unfollow')}}" method="POST">
     {{ csrf_field() }}
@@ -24,8 +24,6 @@
 
   @endforeach
 
-
-
   <!-- 投稿リスト -->
        @foreach ($posts as $posts)
 <li class="post-block">
@@ -33,7 +31,7 @@
           <div class="post-content">
 
   <tr>
-  <td><img src="{{ asset('images/icon1.png') }}"></a></td>
+<td><img src="{{asset('storage/'.$users->images)}}" class="icon">{{$users->username}}</td>
  <div class="post-name">{{ $posts->user->username }}</div>
 
           <div><td>{{ $posts->created_at }}</td></div>

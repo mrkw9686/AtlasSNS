@@ -25,9 +25,9 @@ $users = User::where('id',$id)->get();
        $data = $request->all();
                //画像のオリジナルネームを取得
         $filename = $request->images->getClientOriginalName();
-
         //画像を保存して、そのパスを$imgに保存　第三引数に'public'を指定
         $img = $request->images->storeAs('',$filename,'public');
+
         \DB::table('users')
             ->where('id', $user_id)
             ->update(
@@ -52,6 +52,8 @@ $users = User::where('id',$id)->get();
   $posts = Post::with('user')->where('user_id', $id)->orderBy('created_at', 'desc')->get();
         return view('users.profile',['users'=>$users],['posts'=>$posts]);
     }
+
+
 
 
     public function search(){

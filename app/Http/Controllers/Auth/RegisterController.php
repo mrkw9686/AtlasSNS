@@ -53,12 +53,7 @@ class RegisterController extends Controller
             'mail' => 'required|string|email|min:5|max:40|unique:mail',
             'password' => 'required|string|alpha_num|min:8|max:20|confirmed',
         ]);
-        if($validator->fails()){
-        return redirect('post/create')
-        //リダイレクト　back()
-         ->withInput()
-        ->withErrors($validator);
-  }
+
     }
 
     /**
@@ -85,16 +80,19 @@ class RegisterController extends Controller
         if($request->isMethod('post')){
             $data = $request->input();
          $username = $request->input('username');
+        $this->validator($data);
+
+
 
             $this->create($data);
-            // $this->validator($data);
-            return view('auth.added',['username'=>$username]);
+
+            return redirect('added');
         }
         return view('auth.register');
     }
 
         public function added(){
-        return view('auth.added');
+        return view('auth.added',['username'=>$username]);
     }
 
 }
