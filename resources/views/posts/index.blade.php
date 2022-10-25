@@ -2,6 +2,9 @@
 
 @section('content')
 <!-- 投稿ボタン -->
+@foreach ($errors->all() as $error)
+  <li>{{$error}}</li>
+@endforeach
 {!! Form::open(['url' => 'post/create']) !!}
      <div class="form-group">
     <td><img src="{{asset('storage/'.Auth::user()->images)}}" class="icon"></td>

@@ -18,38 +18,20 @@ class PostsController extends Controller
     }
 
 
-
-//     protected function validator($data)
-//     {
-//   $validator = Validator::make($data->all(),
-//             ['newPost' => 'required|max:10',]
-//         );
-//                 if($validator->fails()){
-//         return redirect('/top')
-//         //リダイレクト　back()
-//          ->withInput()
-//          ->withErrors($validator);
-//         }
-//     }
-    // バリテーション
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'title' => 'required|unique:posts|max:255',
-    //         'body' => 'required',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return redirect('post/create')
-    //                     ->withErrors($validator)
-    //                     ->withInput();
-    //     }
-
   public function create(Request $request)
     {
+        
         $user_id = Auth::id();
         $post = $request->input('newPost');
-                // $this->validator($data);
+          $errors = Validator::make($post,
+         ['newPost' => 'required|string|min:3|max:200']
+        );
+        if($errors->fails()){
+        return redirect('/top')
+         ->withInput()
+         ->withErrors($errors);
+        }
+
         \DB::table('posts')->insert([
             'post' => $post,
             'user_id' => $user_id ]);
