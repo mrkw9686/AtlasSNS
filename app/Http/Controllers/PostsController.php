@@ -20,12 +20,13 @@ class PostsController extends Controller
 
   public function create(Request $request)
     {
-        
+
         $user_id = Auth::id();
         $post = $request->input('newPost');
-          $errors = Validator::make($post,
-         ['newPost' => 'required|string|min:3|max:200']
-        );
+$rule = ['newPost' => 'required|string|min:3|max:200'
+  // バリデーションルール定義
+  ];
+          $errors = Validator::make($post, $rule);
         if($errors->fails()){
         return redirect('/top')
          ->withInput()
