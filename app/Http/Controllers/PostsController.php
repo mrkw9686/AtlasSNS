@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Post;
+use App\User;
 class PostsController extends Controller
 {
 
@@ -22,11 +23,12 @@ class PostsController extends Controller
     {
 
         $user_id = Auth::id();
-        $post = $request->input('newPost');
-$rule = ['newPost' => 'required|string|min:3|max:200'
+        $post = $request->input();
+        $errors = Validator::make($post, [
+            'newPost' => 'required|string|min:3|max:200'
   // バリデーションルール定義
-  ];
-          $errors = Validator::make($post, $rule);
+        ]);
+        $errors->validate();
         if($errors->fails()){
         return redirect('/top')
          ->withInput()
@@ -34,8 +36,9 @@ $rule = ['newPost' => 'required|string|min:3|max:200'
         }
 
         \DB::table('posts')->insert([
-            'post' => $post,
-            'user_id' => $user_id ]);
+            'user_id' => $user_id,
+            'post' => $post['newPost']
+]);
         return redirect('/top');
 
    }

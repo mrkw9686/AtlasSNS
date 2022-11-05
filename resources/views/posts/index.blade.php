@@ -23,6 +23,7 @@
           <div><td>{{ $posts->created_at }}</td></div>
           <div><td>{{ $posts->post }}</td></div>
 </div>
+@if (Auth::user()->id == $posts->user_id)
 <!-- 更新ボタン -->
     <div class="content">
         <a class="js-modal-open" href="" post_id="{{ $posts->id }}" post="{{ $posts->post }}" ><img src="{{ asset('images/edit.png') }}"></a>
@@ -30,6 +31,7 @@
 <!-- 削除ボタン -->
           <a class="btn btn-danger" href="/post/{{$posts->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">　<img src="{{ asset('images/trash.png') }}"></a>
         </li>
+@endif
        @endforeach
        <!-- モーダルウィンドウ -->
        <div class="modal js-modal">

@@ -7,6 +7,7 @@ use Auth;
 use App\User;
 use follows;
 use App\Post;
+use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     //
@@ -23,6 +24,23 @@ $users = User::where('id',$id)->get();
 
         $user_id =Auth::id();
        $data = $request->all();
+
+       $errors = Validator::make($data, [
+            'username' => 'required|string|min:2|max:12',
+                'mail' => 'required|string|email|min:5|max:40|unique:users',
+                'password' => 'string|alpha_num|min:8|max:20|confirmed',
+                'password_confirmation' => 'string|alpha_num|min:8|max:20',
+                'bio' =>'max:150',
+                'images'=>'file|image|mimes:jpg,png,bmp,gif,svg|alpha_num'
+  // バリデーションルール定義
+        ]);
+        $errors->validate();
+        if($errors->fails()){
+        return redirect('/top')
+         ->withInput()
+         ->withErrors($errors);
+        }
+if (isset($data['images'])){
                //画像のオリジナルネームを取得
         $filename = $request->images->getClientOriginalName();
         //画像を保存して、そのパスを$imgに保存　第三引数に'public'を指定
@@ -37,7 +55,15 @@ $users = User::where('id',$id)->get();
                     'bio' =>$data['bio'],
                     'images'=> $img
                 ]);
-
+ } else {
+             \DB::table('users')
+            ->where('id', $user_id)
+            ->update(
+                ['username' => $data['username'],
+                    'mail' => $data['mail'],
+                    'password' => bcrypt($data['password']),
+                    'bio' =>$data['bio'],
+                ]);}
 
         return redirect('/myprofile');
     }
