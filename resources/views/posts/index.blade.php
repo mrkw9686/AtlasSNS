@@ -17,6 +17,13 @@
 <li class="post-block">
        <tr>
           <td>{{ $posts->id }}</td>
+           <td>
+    @if($posts->user->images == 'dawn.png')
+  <img src="{{asset('images/icon1.png')}}" class="icon">
+@else
+ <img src="{{asset('storage/'.$posts->user->images)}}" class="icon">
+  @endif
+</td>
           <div class="post-content">
  <div class="post-name">{{ $posts->user->username }}</div>
 

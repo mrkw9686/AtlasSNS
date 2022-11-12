@@ -4,10 +4,15 @@
 
 
   @foreach($users as $users)
-
-  <td><img src="{{asset('storage/'.$users->images)}}" class="icon">{{$users->username}}</td>
+ <td>
+    @if($users->images == 'dawn.png')
+  <img src="{{asset('images/icon1.png')}}" class="icon">
+@else
+ <img src="{{asset('storage/'.$users->images)}}" class="icon">
+  @endif
+</td>
   <td>Bio{{$users->bio}} </td>
-  
+
   @if (auth()->user()->isFollowing($users->id))
   <form action="{{ url('/users/unfollow')}}" method="POST">
     {{ csrf_field() }}

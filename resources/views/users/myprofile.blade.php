@@ -4,7 +4,13 @@
 
   @foreach($users as $users)
 
-    <td><img src="{{asset('storage/'.Auth::user()->images)}}" class="icon"></td>
+ <td>
+    @if($users->images == 'dawn.png')
+  <img src="{{asset('images/icon1.png')}}" class="icon">
+@else
+ <img src="{{asset('storage/'.$users->images)}}" class="icon">
+  @endif
+</td>
 
 @foreach ($errors->all() as $error)
   <li>{{$error}}</li>

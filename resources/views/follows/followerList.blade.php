@@ -4,7 +4,13 @@
 
   @foreach($users as $users)
 
-  <td><a href="/profile/{{$users->id}}"><img src="{{asset('storage/'.$users->images)}}" class="icon"></a></td>
+  <td><a href="/profile/{{$users->id}}">
+ @if($users->images == 'dawn.png')
+  <img src="{{asset('images/icon1.png')}}" class="icon">
+@else
+ <img src="{{asset('storage/'.$users->images)}}" class="icon">
+  @endif
+</a></td>
 @endforeach
   <!-- 投稿リスト -->
        @foreach ($posts as $posts)
