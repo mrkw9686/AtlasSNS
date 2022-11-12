@@ -23,7 +23,7 @@
           <div><td>{{ $posts->created_at }}</td></div>
           <div><td>{{ $posts->post }}</td></div>
 </div>
-@if (Auth::user()->id == $posts->user_id)
+@if (Auth::user()->id === $posts->user_id)
 <!-- 更新ボタン -->
     <div class="content">
         <a class="js-modal-open" href="" post_id="{{ $posts->id }}" post="{{ $posts->post }}" ><img src="{{ asset('images/edit.png') }}"></a>
@@ -37,7 +37,7 @@
        <div class="modal js-modal">
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-<form method="POST" action="{{ url('/update')}}" accept-charset="UTF-8">
+<form method="POST" action="{{ url('/post/update')}}" accept-charset="UTF-8">
             <input class="modal_id" name="id" type="hidden" value="post_id">
 
             <textarea class="modal_post" name="upPost"></textarea>

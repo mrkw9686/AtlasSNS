@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Post;
-use App\User;
 class PostsController extends Controller
 {
 
@@ -42,15 +41,6 @@ class PostsController extends Controller
         return redirect('/top');
 
    }
-
-public function updateForm($id)
-{
-
-     \DB::table('posts')
-      ->where('id', $id)
-      ->first();
-        return view('posts.index', compact('post'));
-}
 
     public function update(Request $request)
     {

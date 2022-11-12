@@ -88,13 +88,12 @@ class RegisterController extends Controller
     ->withErrors($errors);
   }
             $this->create($data);
-            return redirect('added');
+        $username = $request->input('username');
+        return view('auth.added',['username'=>$username]);
+
         }
         return view('auth.register');
     }
 
-        public function added(){
-        return view('auth.added',['username'=>$username]);
-    }
 
 }

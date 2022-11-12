@@ -37,8 +37,6 @@ Route::get('/top','PostsController@index');
 
 Route::post('/post/create','PostsController@create');
 
-Route::get('/post/{id}/update-form', 'PostsController@updateForm');
-
 Route::post('/post/update', 'PostsController@update');
 
 Route::get('/post/{id}/delete','PostsController@delete');

@@ -27,11 +27,11 @@ $users = User::where('id',$id)->get();
 
        $errors = Validator::make($data, [
             'username' => 'required|string|min:2|max:12',
-                'mail' => 'required|string|email|min:5|max:40|unique:users',
+                'mail' => 'required|string|email|min:5|max:40|unique:users,mail,'.$user_id.',id',
                 'password' => 'string|alpha_num|min:8|max:20|confirmed',
                 'password_confirmation' => 'string|alpha_num|min:8|max:20',
                 'bio' =>'max:150',
-                'images'=>'file|image|mimes:jpg,png,bmp,gif,svg|alpha_num'
+                'images'=>'file|image|mimes:jpg,png,bmp,gif,svg'
   // バリデーションルール定義
         ]);
         $errors->validate();
