@@ -4,7 +4,7 @@
 
 {!! Form::open() !!}
 
-<h2>新規ユーザー登録</h2>
+<p>新規ユーザー登録</p>
 
 @foreach ($errors->all() as $error)
   <li>{{$error}}</li>

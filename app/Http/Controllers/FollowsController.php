@@ -43,7 +43,7 @@ class FollowsController extends Controller
             'followed_id' =>$user
 
         ]);
-        return redirect('/search');
+        return back();
     }
 
     public function unfollow(Request $request) {
@@ -53,6 +53,6 @@ class FollowsController extends Controller
         if (!empty($follow)) {
         $follow->delete();
         }
-return redirect('/search');
+return back();
     }
 }

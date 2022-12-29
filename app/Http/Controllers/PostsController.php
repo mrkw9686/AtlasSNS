@@ -45,7 +45,6 @@ class PostsController extends Controller
     public function update(Request $request)
     {
 
-        $user_id= Auth::id();
         $id = $request->input('id');
         $up_post = $request->input('upPost');
         \DB::table('posts')
@@ -59,7 +58,7 @@ class PostsController extends Controller
 
 public function delete($id)
 {
-    $user_id= Auth::id();
+
      \DB::table('posts')
      ->where('id',$id)
      ->delete();

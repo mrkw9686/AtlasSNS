@@ -29,46 +29,67 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="{{ asset('images/atlas.png') }}"></a></h1>
-       <p><a href="/myprofile"><img src="{{asset('storage/'.Auth::user()->images)}}" class="icon"></a>{{Auth::user()->username}}さん</p>
+        <h1><a href="/top"><img src="{{ asset('images/atlas.png') }}" width="100"></a></h1>
 
-        <div class="accordion">
+<div class="user">
+<div class="block">
+       <div class="name">{{Auth::user()->username}}  さん</div>
+
+       <div class="accordion">
           <dl>
             <dt></dt>
+            <div class="menu">
             <dd><span><a href="/top">ホーム</a></span></dd>
-            <dd><span><a href="/myprofile">プロフィール</a></span></dd>
+            <dd><span><a href="/myprofile">プロフィール編集</a></span></dd>
             <dd><span><a href="/logout">ログアウト</a></span></dd>
+            </div>
           </dl>
         </div>
-
+</div>
+        <p><a href="/myprofile">
+    @if(Auth::user()->images == 'dawn.png')
+  <img src="{{asset('images/icon1.png')}}" class="icon">
+@else
+<img src="{{asset('storage/'.Auth::user()->images)}}" class="icon">
+  @endif
+    </a></p>
+</div>
 
     </header>
     <div id="row">
-        <div id="container">
-            @yield('content')
-        </div >
-        <div id="side-bar">
-            <div id="confirm">
-                <p>{{Auth::user()->username}}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{(auth()->user()->follows()->count())}}名</p>
-                </div>
-                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p>{{(auth()->user()->followers()->count())}}名</p>
-                </div>
-                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
-            </div>
 
-        <button id="sbtn" type="submit">
-  <p class="btn"><a href="/search">ユーザー検索</a></p>
+        <div class="side-bar">
+            <div class="confirm">
+                <p class="side-text">{{Auth::user()->username}}さんの</p>
+                <div class="side-text">
+                    <p >フォロー数</p>
+                    <p >{{(auth()->user()->follows()->count())}}人</p>
+                </div>
+                <div class="f-btn">
+                <p class="btn btn-primary"><a href="/follow-list">フォローリスト</a></p>
+                </div>
+                <div class="side-text">
+                    <p>フォロワー数</p>
+                    <p>{{(auth()->user()->followers()->count())}}人</p>
+                </div>
+                <div class="f-btn">
+                <p class="btn btn-primary"><a href="/follower-list">フォロワーリスト</a></p>
+                </div>
+            </div>
+<div class="u-btn">
+        <button class="btn btn-primary" type="submit">
+  <p ><a href="/search">ユーザー検索</a></p>
         </button>
+</div>
         </div>
-    </div>
+
+               <div id="container">
+            @yield('content')
+</div>
+        </div >
     <footer>
     </footer>
+
 
 </body>
 </html>
