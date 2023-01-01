@@ -80,13 +80,12 @@
         <button class="btn btn-primary" type="submit">
   <p ><a href="/search">ユーザー検索</a></p>
         </button>
-</div>
         </div>
-
-               <div id="container">
+        </div>
+         <div id="container">
             @yield('content')
 </div>
-        </div >
+</div>
     <footer>
     </footer>
 
