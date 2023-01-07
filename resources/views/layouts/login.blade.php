@@ -46,13 +46,13 @@
           </dl>
         </div>
 </div>
-        <p><a href="/myprofile">
+        <p>
     @if(Auth::user()->images == 'dawn.png')
   <img src="{{asset('images/icon1.png')}}" class="icon">
 @else
 <img src="{{asset('storage/'.Auth::user()->images)}}" class="icon">
   @endif
-    </a></p>
+    </p>
 </div>
 
     </header>
