@@ -12,7 +12,13 @@
 {!! Form::open(['url' => 'post/create']) !!}
 <div class="form-group">
     <div class="form-area">
-             <td><img src="{{asset('storage/'.Auth::user()->images)}}" class="icon"></td>
+      
+    @if(Auth::user()->images == 'dawn.png')
+  <img src="{{asset('images/icon1.png')}}" class="icon">
+@else
+<img src="{{asset('storage/'.Auth::user()->images)}}" class="icon">
+  @endif
+  
          {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-box', 'placeholder' => '投稿内容を入力してください。']) !!}
             </div>
     <div class="form-button">
